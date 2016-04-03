@@ -1,0 +1,39 @@
+---
+
+  - fail: msg='Project name not set'
+    when: project_name == ''
+
+  - set_fact: "project_dir={{job_directory}}/{{project_name}}"
+    when: job == 'yes' or personal_directory is undefined or personal_directory == ''
+
+  - set_fact: "project_dir={{personal_directory}}/{{project_name}}"
+    when: job != 'yes' and personal_directory is defined and personal_directory != ''
+
+  - name: create Dockerfile
+    template: "src=templates/Dockerfile.j2 dest={{project_dir}}/Dockerfile"
+
+  - name: copy docker-compose.yml
+    copy: "src=docker-compose.yml dest={{project_dir}}/docker-compose.yml"
+
+  - name: copy new_app.rb
+    copy: "src=new_app.rb dest={{project_dir}}/new_app.rb"
+
+  - template: "src=templates/Gemfile.j2 dest={{project_dir}}/Gemfile"
+  - file: 'path={{project_dir}}/Gemfile.lock state=touch'
+
+  - name: build container
+    command: docker-compose build
+    args:
+      chdir: "{{project_dir}}"
+
+  - command: docker-compose run web bundle
+    args:
+      chdir: "{{project_dir}}"
+
+  - name: build project
+    command: docker-compose run web bundle exec rails new . --force --skip-gems spring sdoc byebug web-console -T -d postgresql -m ./new_app.rb
+    args:
+      chdir: "{{project_dir}}"
+
+  - name: remove new_app file
+    file: "path={{project_dir}}/new_app.rb state=absent"

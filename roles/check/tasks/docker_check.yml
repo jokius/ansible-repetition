@@ -1,0 +1,7 @@
+---
+
+  - command: docker -v
+    register: result
+    ignore_errors: True
+  - fail: msg="Docker not installed. Or Docker cli not load."
+    when: result|failed

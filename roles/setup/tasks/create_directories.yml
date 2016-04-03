@@ -1,0 +1,5 @@
+---
+
+  - file: path="{{job_directory}}" state=directory
+  - file: path="{{personal_directory}}" state=directory
+    when: personal_directory != ''

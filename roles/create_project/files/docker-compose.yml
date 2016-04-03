@@ -1,0 +1,36 @@
+web:
+  build: .
+  command: bundle exec rails server -p 3000 -b '0.0.0.0'
+  volumes:
+    - .:/web
+  ports:
+    - 80:3000
+  links:
+    - postgres
+    - redis
+  volumes_from:
+    - bundle
+    - ssh-agent
+  environment:
+    - GEM_HOME=/bundle
+    - SSH_AUTH_SOCK=/root/.ssh/socket
+postgres:
+  image: postgres:9.5
+  ports:
+    - 5432:5432
+  volumes_from:
+    - db_date
+redis:
+  image: redis:3.0
+  ports:
+    - 6379
+bundle:
+  image: busybox
+  command: echo 123
+  volumes:
+    - /bundle
+db_date:
+  image: busybox
+  command: echo db
+  volumes:
+    - /var/lib/postgresql/data

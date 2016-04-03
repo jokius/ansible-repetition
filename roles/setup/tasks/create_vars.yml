@@ -1,0 +1,5 @@
+---
+
+  - file: path="{{playbook_dir}}/vars" state=absent
+  - file: path="{{playbook_dir}}/vars" state=directory
+  - file: path="{{playbook_dir}}/vars/defaults.yml" state=touch

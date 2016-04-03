@@ -1,0 +1,22 @@
+---
+
+- hosts: localhost
+  connection: local
+
+  vars_prompt:
+    - name: ruby_vestion
+      prompt: 'default Ruby version'
+      default: 2.3.0
+      private: no
+
+    - name: job_directory
+      prompt: 'Set directory for job projects'
+      default: '~/SP-projects'
+      private: no
+
+    - name: personal_directory
+      prompt: 'Set directory for personal projects'
+      private: no
+
+  roles:
+    - setup
