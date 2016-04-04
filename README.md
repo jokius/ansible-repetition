@@ -1,8 +1,7 @@
 Ansible new project generator
 ===================
 
-It is a simple Ansible playbook for creating a new project using RoR  Docker
-
+It is simple Ansible playbook for RoR project generation using Docker
 
 How to use
 -------------
