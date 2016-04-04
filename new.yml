@@ -24,6 +24,10 @@
       private: no
       default: ~> 4.2.0
 
+    - name: git_init
+      prompt: 'Git init?'
+      default: 'yes'
+
     - name: job
       prompt: 'Job projects?'
       private: no

@@ -37,3 +37,9 @@
 
   - name: remove new_app file
     file: "path={{project_dir}}/new_app.rb state=absent"
+
+  - name: init git
+    command: git init
+    args:
+      chdir: "{{project_dir}}"
+    when: git_init == 'yes'
