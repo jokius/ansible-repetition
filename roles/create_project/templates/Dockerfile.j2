@@ -1,7 +1,7 @@
-{% if current_ruby_vestion == '' %}
-  FROM ruby:{{ ruby_vestion }}
+{% if current_ruby_version == '' %}
+  FROM ruby:{{ ruby_version }}
 {% else %}
-  FROM ruby:{{ current_ruby_vestion }}
+  FROM ruby:{{ current_ruby_version }}
 {% endif %}
 
 MAINTAINER djok69@gmail.com

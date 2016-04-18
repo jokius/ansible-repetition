@@ -1,2 +1,6 @@
 - include: create_dir.yml
+  tags:
+    - create_dir
 - include: build.yml
+  tags:
+    - only_build

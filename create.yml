@@ -1,0 +1,34 @@
+---
+- hosts: 127.0.0.1
+  connection: local
+
+  vars_files:
+    - vars/defaults.yml
+
+  roles:
+    - check
+    - ssh_agent
+    - create_project
+
+  vars_prompt:
+    - name: project_name
+      prompt: Project name
+      private: no
+
+    - name: current_ruby_version
+      prompt: 'Ruby version. Leave blank for defaults'
+      private: no
+
+    - name: rails_version
+      prompt: 'Ruby version. Leave blank for defaults'
+      private: no
+      default: ~> 4.2.0
+
+    - name: git_init
+      prompt: 'Git init?'
+      default: 'yes'
+
+    - name: job
+      prompt: 'Job projects?'
+      private: no
+      default: 'yes'

@@ -4,14 +4,14 @@
   connection: local
 
   vars_prompt:
-    - name: ruby_vestion
+    - name: ruby_version
       prompt: 'default Ruby version'
       default: 2.3.0
       private: no
 
     - name: job_directory
       prompt: 'Set directory for job projects'
-      default: '~/SP-projects'
+      default: '~/Job-projects'
       private: no
 
     - name: personal_directory

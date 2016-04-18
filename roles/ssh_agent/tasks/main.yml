@@ -1,1 +1,3 @@
 - include: setup_ssh_agent_container.yml
+  tags:
+    - ssh_agent

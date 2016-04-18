@@ -1,6 +1,6 @@
 ---
 
-  - lineinfile: dest={{playbook_dir}}/vars/defaults.yml line="ruby_vestion{{':'}} {{ruby_vestion}}"
+  - lineinfile: dest={{playbook_dir}}/vars/defaults.yml line="ruby_version{{':'}} {{ruby_version}}"
   - lineinfile: dest={{playbook_dir}}/vars/defaults.yml line="job_directory{{':'}} {{job_directory}}"
   - lineinfile: dest={{playbook_dir}}/vars/defaults.yml line="personal_directory{{':'}} {{personal_directory}}"
     when: personal_directory != ''
