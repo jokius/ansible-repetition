@@ -3,14 +3,14 @@
   - name: run ssh-agent container
     docker:
       name: ssh-agent
-      image: whilp/ssh-agent:latest
+      image: jokius/ssh-agent:latest
       state: started
       use_tls: encrypt
 
   - name: add ssh keys
-    command: "docker run --rm --volumes-from=ssh-agent -v {{ansible_env.HOME}}/.ssh:/ssh whilp/ssh-agent:latest ssh-add /ssh/id_rsa"
+    command: "docker run --rm --volumes-from=ssh-agent -v {{ansible_env.HOME}}/.ssh:/ssh jokius/ssh-agent:latest ssh-add /ssh/id_rsa"
 
-  - command: "docker run --rm --volumes-from=ssh-agent -v {{ansible_env.HOME}}/.ssh:/ssh whilp/ssh-agent:latest ssh-add -L"
+  - command: "docker run --rm --volumes-from=ssh-agent -v {{ansible_env.HOME}}/.ssh:/ssh jokius/ssh-agent:latest ssh-add -L"
 
   - name: add known_hosts
-    command: "docker run --rm --volumes-from=ssh-agent -v {{ansible_env.HOME}}/.ssh:/ssh whilp/ssh-agent:latest cp /ssh/known_hosts /root/.ssh/known_hosts"
+    command: "docker run --rm --volumes-from=ssh-agent -v {{ansible_env.HOME}}/.ssh:/ssh jokius/ssh-agent:latest cp /ssh/known_hosts /root/.ssh/known_hosts"
