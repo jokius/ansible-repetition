@@ -1,11 +1,7 @@
 ---
 
   - name: run ssh-agent container
-    docker:
-      name: ssh-agent
-      image: jokius/ssh-agent:latest
-      state: started
-      use_tls: encrypt
+    command: "docker run -d --name=ssh-agent jokius/ssh-agent:latest"
 
   - name: add ssh keys
     command: "docker run --rm --volumes-from=ssh-agent -v {{ansible_env.HOME}}/.ssh:/ssh jokius/ssh-agent:latest ssh-add /ssh/id_rsa"
