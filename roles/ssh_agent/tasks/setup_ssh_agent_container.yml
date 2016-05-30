@@ -1,5 +1,9 @@
 ---
 
+  - name: remove ssh-agent if exsist
+    command: docker rm -f ssh-agent
+    ignore_errors: yes
+
   - name: run ssh-agent container
     command: "docker run -d --name=ssh-agent jokius/ssh-agent:latest"
 
