@@ -20,12 +20,13 @@
       private: no
 
     - name: rails_version
-      prompt: 'Ruby version. Leave blank for defaults'
+      prompt: 'Rails version. Leave blank for defaults'
       private: no
-      default: ~> 4.2.0
+      default: ~> 5.0.0
 
     - name: git_init
       prompt: 'Git init?'
+      private: no
       default: 'yes'
 
     - name: job
