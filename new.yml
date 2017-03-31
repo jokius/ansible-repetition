@@ -15,7 +15,7 @@
       prompt: Project name
       private: no
 
-    - name: current_ruby_vestion
+    - name: current_ruby_version
       prompt: 'Ruby version. Leave blank for defaults'
       private: no
 
