@@ -18,14 +18,6 @@ gem_group :development do
   # Code styling
   gem 'rubocop', require: false
   gem 'rubocop-rspec'
-
-  # Guard
-  gem 'guard'
-  gem 'guard-rubocop'
-  gem 'guard-bundler', require: false
-  gem 'guard-rspec', require: false
-  gem 'terminal-notifier'
-  gem 'terminal-notifier-guard'
 end
 
 gem_group :development, :test do
@@ -61,37 +53,6 @@ application <<-RUBY
       Hirb.enable if defined?(::Hirb)
     end
 RUBY
-
-create_file 'Guardfile', 'guard :bundler do
-  require \'guard/bundler\'
-  require \'guard/bundler/verify\'
-  helper = Guard::Bundler::Verify.new
-
-  files = [\'Gemfile\']
-  files += Dir[\'*.gemspec\'] if files.any? { |f| helper.uses_gemspec?(f) }
-
-  # Assume files are symlinked from somewhere
-  files.each { |file| watch(helper.real_path(file)) }
-end
-
-guard :rubocop do
-  watch(/.+\.rb$/)
-  watch(%r{/(?:.+\/)?\.rubocop\.yml$/}) { |m| File.dirname(m[0]) }
-end
-
-guard :rspec, cmd: \'bundle exec rspec\' do
-  watch(\'spec/spec_helper.rb\')                        { \'spec\' }
-  watch(\'config/routes.rb\')                           { \'spec/routing\' }
-  watch(\'app/controllers/application_controller.rb\')  { \'spec/controllers\' }
-  watch(%r{^spec/.+_spec\.rb$})
-  watch(%r{^app/(.+)\.rb$})                           { |m| "spec/#{m[1]}_spec.rb" }
-  watch(%r{^app/(.*)(\.erb|\.haml|\.slim)$})          { |m| "spec/#{m[1]}#{m[2]}_spec.rb" }
-  watch(%r{^lib/(.+)\.rb$})                           { |m| "spec/lib/#{m[1]}_spec.rb" }
-  watch(%r{^app/controllers/(.+)_(controller)\.rb$})  do |m|
-    ["spec/routing/#{m[1]}_routing_spec.rb", "spec/#{m[2]}s/#{m[1]}_#{m[2]}_spec.rb", "spec/acceptance/#{m[1]}_spec.rb"]
-  end
-end
-'
 
 create_file '.rubocop.yml','Style/Documentation:
   Enabled: false
